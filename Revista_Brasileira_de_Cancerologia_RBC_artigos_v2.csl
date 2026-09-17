@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="pt-BR">
+  <info>
+    <title>Revista Brasileira de Cancerologia (RBC) - Vancouver</title>
+    <title-short>RBC</title-short>
+    <id>http://www.zotero.org/styles/revista-brasileira-de-cancerologia-rbc-v2</id>
+    <link href="https://rbc.inca.gov.br/index.php/revista/instrautores" rel="documentation"/>
+    <link href="http://www.zotero.org/styles/revista-brasileira-de-cancerologia-rbc-v2" rel="self"/>
+    <category citation-format="numeric"/>
+    <category field="medicine"/>
+    <summary>Numerical superscript Vancouver style adapted to Revista Brasileira de Cancerologia: up to three authors, NLM journal abbreviations, journal year-volume-issue-pages and DOI.</summary>
+    <updated>2026-09-17T18:00:00+00:00</updated>
+  </info>
+
+  <macro name="author">
+    <names variable="author">
+      <name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", " delimiter-precedes-last="always" et-al-min="4" et-al-use-first="3"/>
+      <et-al/>
+      <substitute>
+        <text variable="title"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="article-title">
+    <text variable="title" text-case="sentence"/>
+  </macro>
+
+  <macro name="journal-name">
+    <text variable="container-title" form="short" strip-periods="true"/>
+  </macro>
+
+  <macro name="journal-details">
+    <group delimiter="">
+      <date variable="issued">
+        <date-part name="year"/>
+      </date>
+      <text variable="volume" prefix=";"/>
+      <text variable="issue" prefix="(" suffix=")"/>
+      <text variable="page" prefix=":"/>
+    </group>
+  </macro>
+
+  <macro name="doi">
+    <text variable="DOI" prefix="doi:"/>
+  </macro>
+
+  <citation collapse="citation-number">
+    <layout vertical-align="sup" delimiter=",">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <bibliography et-al-min="4" et-al-use-first="3" second-field-align="flush">
+    <layout suffix=".">
+      <text variable="citation-number" suffix=". "/>
+      <choose>
+        <if type="article-journal" match="any">
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="article-title"/>
+            <group delimiter=". ">
+              <text macro="journal-name"/>
+              <text macro="journal-details"/>
+            </group>
+            <text macro="doi"/>
+          </group>
+        </if>
+        <else-if type="article-magazine article-newspaper" match="any">
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="article-title"/>
+            <text macro="journal-name"/>
+            <date variable="issued"><date-part name="year"/></date>
+            <text variable="page" prefix="p. "/>
+            <text macro="doi"/>
+          </group>
+        </else-if>
+        <else-if type="book">
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="article-title"/>
+            <text variable="edition"/>
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+            <date variable="issued"><date-part name="year"/></date>
+            <text macro="doi"/>
+          </group>
+        </else-if>
+        <else-if type="chapter">
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="article-title"/>
+            <text variable="container-title" prefix="In: "/>
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+            <date variable="issued"><date-part name="year"/></date>
+            <text variable="page" prefix="p. "/>
+            <text macro="doi"/>
+          </group>
+        </else-if>
+        <else>
+          <group delimiter=". ">
+            <text macro="author"/>
+            <text macro="article-title"/>
+            <text variable="publisher-place"/>
+            <text variable="publisher"/>
+            <date variable="issued"><date-part name="year"/></date>
+            <text macro="doi"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
